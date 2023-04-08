@@ -1,5 +1,5 @@
 {
-    "name": "سورس ماكس 
+    "name": "سورس ماكس ,
     "description": " اهلا بكم في تنصيب سورس ماكس  @s_w_m !",
     "logo" : ".",
     "stack": "container",
