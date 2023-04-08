@@ -1,6 +1,6 @@
 {
     "name": "سورس ماكس 
-    "description": " اهلا بكم في تنصيب سورس ماكس @s_w_m",
+    "description": " اهلا بكم في تنصيب سورس ماكس @s_w_m
     "logo" : ".",
     "stack": "container",
     "repository": "https://github.com/perdark/per-sed",
