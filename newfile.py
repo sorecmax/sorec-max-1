@@ -1,0 +1,40 @@
+{
+    "name": "سورس ماكس",
+    "description": " اهلا بكم في تنصيب سورس ماكس @s_w_m!",
+    "logo" : ".",
+    "stack": "container",
+    "repository": "https://github.com/perdark/per-sed",
+    "keywords": [
+        "python",
+        "chatbot",
+        "telegrambot"
+    ],
+    "website": "https://github.com/SS7SS/Tepthon",
+    "env": {
+        "APP_ID": {
+            "description": "ايبي ايدي",
+            "value": "",
+            "required": true
+        },
+        "APP_HASH": {
+            "description": "ايبي هاش",
+            "value": "",
+            "required": true
+        },
+        "TERMUX": {
+            "description": "كود تيرمكس",
+            "value": "",
+            "required": true
+        },
+        "TOKEN": {
+            "description": "توكن البوت",
+            "value": "",
+            "required": true
+        },
+        "BOT_USERNAME": {
+            "description": "يوزر البوت بدون ـ@ـ",
+            "value": "",
+            "required": true
+        }
+    }
+}
